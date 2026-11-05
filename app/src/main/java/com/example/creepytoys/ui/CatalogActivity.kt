@@ -179,15 +179,25 @@ class CatalogActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         val recyclerView: RecyclerView = findViewById(R.id.rv_toy_catalog)
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
 
-        adapter = ToyAdapter(fullToyList) { selectedToy ->
-            val currentQty = cartPreferences.getQuantity(selectedToy.id)
-            cartPreferences.setQuantity(selectedToy.id, currentQty + 1)
-            updateTotalCartCountUI()
-            Toast.makeText(this, "${selectedToy.name} agregado al carrito", Toast.LENGTH_SHORT).show()
-        }
+        // 1. Inicializar el Adapter (FALTABA ESTE PASO)
+        adapter = ToyAdapter(
+            toyList = fullToyList,
+            onAddToCartClick = { selectedToy ->
+                val currentQty = cartPreferences.getQuantity(selectedToy.id)
+                cartPreferences.setQuantity(selectedToy.id, currentQty + 1)
+                updateTotalCartCountUI()
+                Toast.makeText(this, "${selectedToy.name} añadido al carrito", Toast.LENGTH_SHORT).show()
+            }
+        )
 
+        // 2. Cálculo dinámico de columnas (Responsivo para teléfono y tablet)
+        val displayMetrics = resources.displayMetrics
+        val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
+        val spanCount = (screenWidthDp / 160).toInt().coerceAtLeast(1)
+
+        // 3. Asignar LayoutManager y Adapter
+        recyclerView.layoutManager = GridLayoutManager(this, spanCount)
         recyclerView.adapter = adapter
     }
 

@@ -95,10 +95,10 @@
     <!-- LISTA DE PRODUCTOS (RECYCLERVIEW 3 COLUMNAS) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_toy_catalog"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="@dimen/catalog_padding"
+        android:layout_marginTop="@dimen/catalog_padding"
         android:paddingBottom="16dp"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
