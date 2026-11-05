@@ -1,0 +1,6 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Cambia .DarkActionBar por .NoActionBar -->
+    <style name="Theme.CreepyToys" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Tus colores y estilos... -->
+    </style>
+</resources>

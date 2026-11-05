@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CreepyToys</string>
+    <string name="cd_toy_image_default">Imagen del juguete</string>
+    <string name="cd_btn_add_cart_default">Agregar producto al carrito</string>
+</resources>
