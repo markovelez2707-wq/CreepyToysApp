@@ -2,6 +2,24 @@
 Esta es una aplicación nativa para sistema Android enfocada en la venta de juguetes coleccionables de terror con franquicias como Chucky, Five Nights At Freddy´s (FNAF), Poppy Playtime y Stranger things.
 Desarrolé esta aplicación para resolver el flujo completo de una tienda en línea (E2E) con una interfaz adaptable a diferentes pantallas, filtrado dinámico de productos, persistencia de datos local y un checkout funcional con validaciones de pago.
 
+# Propósito del proyecto:
+Esta aplicación sirve como un entorno de pruebas para Quality Assurance (QA). El objetivo es tener un marco controlado para la ejecución de pruebas manuales y la automatización de casos de prueba de Android.
+
+# Cobertura y casos de prueba clave:
+**UI y maquetación responsiva**:
+- Configuración de grilla responsiva (GridLayoutManager): 2 columnas en modo vertical (portrait) y 3 columnas en horizontal (landscape).
+- Adaptabilidad de tarjetas de producto con  ConstraintLayout evitando compresión o truncamiento de texto.
+- visualización flotante de imágenes a pantalla completa con AlertDialog al interactuar con las tarjetas.
+**Lógica de negocio y carrito**:
+- Persistencia local con SharedPreferences (CartPreferences).
+- Sincronización en tiempo real del badge contador en la ToolBar mediante el ciclo de vida (onResume).
+- Gestión dinámica de Items (sumar, restar y vaciar el carrito) dentro de un model BottomSheetDialog.
+**Flujo de Checkout y validaciones**:
+- Transferencia de datos y validaciones vía Intent extras.
+- Validación de campos obligatorios en el formulario de envío (Nombre y Dirección).
+- Visibilidad condicional según el método de pago elegido (mostrar/ocultar campos de tarjeta al cambiar entre efectivo y tarjeta).
+- Borrado automático de la sección del carrito al terminar el pedido.
+    
 ## Funcionalidades
 **Interfaz adaptable a diferentes tipos de pantallas** (smartphones, tablets) 
 **Identidad visual temática**: Toolbar en color `80D0000` con un ícono de silueta custom y componenetes material design.
