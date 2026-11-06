@@ -38,15 +38,21 @@ class ToyAdapter(
         holder.tvFranchise.text = toy.franchise
         holder.tvPrice.text = "$${toy.price}"
 
-        //IMAGEN EN LA PANTALLA
+        // Cargar la imagen en la tarjeta
         holder.imgToy.setImageResource(toy.imageResId)
 
         // Accesibilidad (TalkBack)
         holder.imgToy.contentDescription = toy.contentDescription
         holder.btnAddToCart.contentDescription = "Agregar ${toy.name} al carrito por $${toy.price}"
 
+        // Evento al presionar el botón AGREGAR
         holder.btnAddToCart.setOnClickListener {
             onAddToCartClick(toy)
+        }
+
+        // Evento al tocar la IMAGEN para verla en pantalla completa
+        holder.imgToy.setOnClickListener {
+            showFullImageDialog(holder.itemView.context, toy.imageResId)
         }
     }
 
@@ -61,7 +67,7 @@ class ToyAdapter(
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dialog_full_image)
 
-        // Configuramos el fondo transparente y tamaño completo
+        // Fondo transparente y tamaño ajustado
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -71,7 +77,7 @@ class ToyAdapter(
         val imageView = dialog.findViewById<ImageView>(R.id.img_full_size)
         imageView.setImageResource(imageResId)
 
-        // Al tocar la imagen en grande, el diálogo se cierra
+        // Al tocar la imagen ampliada, el diálogo se cierra
         imageView.setOnClickListener {
             dialog.dismiss()
         }

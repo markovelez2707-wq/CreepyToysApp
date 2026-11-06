@@ -1,6 +1,7 @@
 package com.example.creepytoys.ui
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -49,6 +50,11 @@ class CatalogActivity : AppCompatActivity() {
         setupData()
         setupRecyclerView()
         setupFilterChips()
+        updateTotalCartCountUI()
+    }
+
+    override fun onResume() {
+        super.onResume()
         updateTotalCartCountUI()
     }
 
@@ -180,7 +186,6 @@ class CatalogActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val recyclerView: RecyclerView = findViewById(R.id.rv_toy_catalog)
 
-        // 1. Inicializar el Adapter (FALTABA ESTE PASO)
         adapter = ToyAdapter(
             toyList = fullToyList,
             onAddToCartClick = { selectedToy ->
@@ -191,12 +196,9 @@ class CatalogActivity : AppCompatActivity() {
             }
         )
 
-        // 2. Cálculo dinámico de columnas (Responsivo para teléfono y tablet)
-        val displayMetrics = resources.displayMetrics
-        val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
-        val spanCount = (screenWidthDp / 160).toInt().coerceAtLeast(1)
+        val orientation = resources.configuration.orientation
+        val spanCount = if (orientation == Configuration.ORIENTATION_LANDSCAPE) 3 else 2
 
-        // 3. Asignar LayoutManager y Adapter
         recyclerView.layoutManager = GridLayoutManager(this, spanCount)
         recyclerView.adapter = adapter
     }
@@ -225,12 +227,11 @@ class CatalogActivity : AppCompatActivity() {
 
     private fun updateTotalCartCountUI() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        if (toolbar.menu.findItem(R.id.action_cart) == null) return
 
         val totalCount = fullToyList.sumOf { toy ->
             cartPreferences.getQuantity(toy.id)
         }
-
-        if (toolbar.menu.findItem(R.id.action_cart) == null) return
 
         if (totalCount > 0) {
             val badgeDrawable = BadgeDrawable.create(this).apply {
@@ -240,6 +241,8 @@ class CatalogActivity : AppCompatActivity() {
                 isVisible = true
             }
             BadgeUtils.attachBadgeDrawable(badgeDrawable, toolbar, R.id.action_cart)
+        } else {
+            BadgeUtils.detachBadgeDrawable(null, toolbar, R.id.action_cart)
         }
     }
 
