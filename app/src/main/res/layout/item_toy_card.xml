@@ -13,63 +13,65 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <!-- 1. Imagen del juguete (Arriba) -->
         <ImageView
             android:id="@+id/img_toy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:maxHeight="300dp"
+            android:maxHeight="250dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-
+        <!-- 2. Nombre del juguete (Debajo de la imagen y deteniéndose antes del botón) -->
         <TextView
             android:id="@+id/tv_toy_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"
             app:layout_constraintTop_toBottomOf="@id/img_toy"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/btn_add_to_cart" />
 
+        <!-- 3. Franquicia del juguete -->
         <TextView
             android:id="@+id/tv_toy_franchise"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/tv_toy_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/btn_add_to_cart" />
 
+        <!-- 4. Precio del juguete -->
         <TextView
             android:id="@+id/tv_toy_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/tv_toy_franchise"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_toy_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_title_size"
-            android:textStyle="bold" />
-
+        <!-- 5. Botón de Agregar (Alineado con el nombre/franquicia a la derecha) -->
         <Button
             android:id="@+id/btn_add_to_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="AGREGAR"
-            app:layout_constraintTop_toTopOf="@id/tv_toy_price"
+            app:layout_constraintTop_toTopOf="@id/tv_toy_name"
             app:layout_constraintBottom_toBottomOf="@id/tv_toy_price"
             app:layout_constraintEnd_toEndOf="parent" />
 

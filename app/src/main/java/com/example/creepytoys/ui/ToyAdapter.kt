@@ -1,5 +1,7 @@
 package com.example.creepytoys.ui
 
+import android.app.Dialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,5 +55,27 @@ class ToyAdapter(
     fun updateList(newList: List<ToyItem>) {
         toyList = newList
         notifyDataSetChanged()
+    }
+
+    private fun showFullImageDialog(context: Context, imageResId: Int) {
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.dialog_full_image)
+
+        // Configuramos el fondo transparente y tamaño completo
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val imageView = dialog.findViewById<ImageView>(R.id.img_full_size)
+        imageView.setImageResource(imageResId)
+
+        // Al tocar la imagen en grande, el diálogo se cierra
+        imageView.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }
