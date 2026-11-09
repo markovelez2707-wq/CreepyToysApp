@@ -9,9 +9,11 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.creepytoys.R
+import com.example.creepytoys.data.CartPreferences
 
 class CheckoutActivity : AppCompatActivity() {
 
@@ -24,13 +26,18 @@ class CheckoutActivity : AppCompatActivity() {
     private lateinit var etCardNumber: EditText
     private lateinit var etCardExp: EditText
     private lateinit var etCardCvv: EditText
+    private lateinit var tvCheckoutTotal: TextView
     private lateinit var btnConfirmOrder: Button
+
+    private lateinit var cartPreferences: CartPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
-        // Vincular vistas
+        cartPreferences = CartPreferences(this)
+
+        // 1. Vincular vistas con sus IDs
         etFullName = findViewById(R.id.et_full_name)
         etAddress = findViewById(R.id.et_address)
         rgPaymentMethods = findViewById(R.id.rg_payment_methods)
@@ -40,10 +47,16 @@ class CheckoutActivity : AppCompatActivity() {
         etCardNumber = findViewById(R.id.et_card_number)
         etCardExp = findViewById(R.id.et_card_exp)
         etCardCvv = findViewById(R.id.et_card_cvv)
+        tvCheckoutTotal = findViewById(R.id.tv_checkout_total)
         btnConfirmOrder = findViewById(R.id.btn_confirm_order)
 
+        // 2. Cargar y mostrar el Total real a pagar
+        displayTotalAmount()
+
+        // 3. Formateador automático de fecha
         setupExpiryDateAutoFormat()
 
+        // 4. Cambiar visibilidad de campos según el método de pago
         rgPaymentMethods.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == R.id.rb_card) {
                 containerCardFields.visibility = View.VISIBLE
@@ -54,11 +67,16 @@ class CheckoutActivity : AppCompatActivity() {
 
         btnConfirmOrder.setOnClickListener {
             if (validateForm()) {
-                // Obtenemos el nombre y lo pasamos al método procesar
                 val userName = etFullName.text.toString().trim()
                 processOrder(userName)
             }
         }
+    }
+
+    private fun displayTotalAmount() {
+        // Obtenemos el total enviado desde la pantalla anterior por Intent Extra
+        val totalAmount = intent.getDoubleExtra("EXTRA_TOTAL_AMOUNT", 0.0)
+        tvCheckoutTotal.text = String.format("Total a Pagar: $%.2f", totalAmount)
     }
 
     private fun setupExpiryDateAutoFormat() {
@@ -90,8 +108,8 @@ class CheckoutActivity : AppCompatActivity() {
         val name = etFullName.text.toString().trim()
         val address = etAddress.text.toString().trim()
 
-        if (name.length < 3) {
-            etFullName.error = "Ingresa un nombre válido (mínimo 3 caracteres)"
+        if (name.length < 10) {
+            etFullName.error = "Ingresa un nombre y apellido válidos (mínimo 10 caracteres)"
             etFullName.requestFocus()
             return false
         }
@@ -130,16 +148,17 @@ class CheckoutActivity : AppCompatActivity() {
         return true
     }
 
-    //  Recibimos el nombre del usuario como parámetro
     private fun processOrder(userName: String) {
-        val cartPrefs = getSharedPreferences("creepy_toys_cart_prefs", MODE_PRIVATE)
-        cartPrefs.edit().clear().apply()
+        // Limpieza garantizada de SharedPreferences
+        val sharedPreferences = getSharedPreferences("creepy_toys_cart_prefs", MODE_PRIVATE)
+        sharedPreferences.edit().clear().commit() // Usamos commit() para asegurar persistencia síncrona inmediata
 
         AlertDialog.Builder(this)
             .setTitle("¡Pedido Confirmado!")
-            .setMessage("¡Gracias por tu compra, $userName! Te llevaremos tu pedido desde las profundidades del averno.")
+            .setMessage("¡Gracias por tu compra, $userName! Tu pedido de Creepy Toys ha sido procesado con éxito.")
             .setPositiveButton("Aceptar") { dialog, _ ->
                 dialog.dismiss()
+                setResult(RESULT_OK) // Notifica a la pantalla anterior que la compra fue exitosa
                 finish()
             }
             .setCancelable(false)
