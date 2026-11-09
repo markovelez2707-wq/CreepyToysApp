@@ -6,6 +6,7 @@
     android:padding="16dp"
     android:background="#1E1E1E">
 
+    <!-- Título -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,24 +14,27 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold" />
-
+    <!-- recyclerview dinámnico -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_cart_items"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="12dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp" />
 
+    <!-- Total  -->
     <TextView
         android:id="@+id/tv_cart_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:text="Total: $0.00"
         android:textColor="#8B0000"
         android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="end" />
 
+    <!-- Botones de Acción -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

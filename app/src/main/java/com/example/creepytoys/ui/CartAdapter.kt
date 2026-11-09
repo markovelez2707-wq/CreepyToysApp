@@ -3,12 +3,12 @@ package com.example.creepytoys.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.creepytoys.R
 import com.example.creepytoys.domain.model.ToyItem
+import java.util.Locale
 
 class CartAdapter(
     private var cartItems: List<Pair<ToyItem, Int>>,
@@ -21,8 +21,8 @@ class CartAdapter(
         val tvName: TextView = view.findViewById(R.id.tv_cart_toy_name)
         val tvPrice: TextView = view.findViewById(R.id.tv_cart_toy_price)
         val tvQuantity: TextView = view.findViewById(R.id.tv_cart_item_quantity)
-        val btnIncrease: ImageButton = view.findViewById(R.id.btn_increase)
-        val btnDecrease: ImageButton = view.findViewById(R.id.btn_decrease)
+        val btnIncrease: TextView = view.findViewById(R.id.btn_increase)
+        val btnDecrease: TextView = view.findViewById(R.id.btn_decrease)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -35,12 +35,21 @@ class CartAdapter(
         val (toy, quantity) = cartItems[position]
 
         holder.tvName.text = toy.name
-        holder.tvPrice.text = "$${toy.price * quantity}"
+
+
+        val itemSubtotal = toy.price * quantity
+
+        holder.tvPrice.text = String.format(Locale.getDefault(), "$%.2f", itemSubtotal)
         holder.tvQuantity.text = quantity.toString()
         holder.imgToy.setImageResource(toy.imageResId)
 
-        holder.btnIncrease.setOnClickListener { onIncreaseClick(toy) }
-        holder.btnDecrease.setOnClickListener { onDecreaseClick(toy) }
+        holder.btnDecrease.setOnClickListener {
+            onDecreaseClick(toy)
+        }
+
+        holder.btnIncrease.setOnClickListener {
+            onIncreaseClick(toy)
+        }
     }
 
     override fun getItemCount(): Int = cartItems.size

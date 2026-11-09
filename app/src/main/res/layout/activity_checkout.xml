@@ -21,7 +21,7 @@
             app:title="Finalizar Pedido"
             app:titleTextColor="@android:color/white" />
 
-        <!-- Sección 1: Dirección de Envío -->
+        <!-- Sección 1: Dirección de envío -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 android:textColor="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Sección 2: Método de Pago -->
+        <!-- Sección 2: Método de pago -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                 android:textColor="#FFFFFF" />
         </RadioGroup>
 
-        <!-- Formulario de Tarjeta (Se oculta si elige efectivo) -->
+        <!-- Formulario de pago con tarjeta (Se oculta si elige efectivo) -->
         <LinearLayout
             android:id="@+id/container_card_fields"
             android:layout_width="match_parent"
@@ -156,7 +156,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Resumen de Costo -->
+        <!-- Resumen de costo -->
         <TextView
             android:id="@+id/tv_checkout_total"
             android:layout_width="match_parent"

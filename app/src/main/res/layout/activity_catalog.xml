@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <!-- BARRA SUPERIOR INTEGRADA CON MARGEN SUPERIOR -->
+    <!-- Barra superior integrada con borde superior -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <!-- Ícono del cuchillo corregido -->
+            <!-- Ícono del cuchillo  -->
             <ImageView
                 android:id="@+id/iv_knife_icon"
                 android:layout_width="28dp"
@@ -43,7 +43,7 @@
         </LinearLayout>
 
     </com.google.android.material.appbar.MaterialToolbar>
-    <!-- GRUPO DE FILTROS -->
+    <!-- Grupo de filtros -->
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_group_filter"
         android:layout_width="0dp"
@@ -92,7 +92,7 @@
             android:text="Stranger Things" />
     </com.google.android.material.chip.ChipGroup>
 
-    <!-- LISTA DE PRODUCTOS (RECYCLERVIEW 3 COLUMNAS) -->
+    <!-- Lista de productos (recycleview a 3 columnas) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_toy_catalog"
         android:layout_width="match_parent"

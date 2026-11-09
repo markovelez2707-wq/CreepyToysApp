@@ -45,12 +45,12 @@ class ToyAdapter(
         holder.imgToy.contentDescription = toy.contentDescription
         holder.btnAddToCart.contentDescription = "Agregar ${toy.name} al carrito por $${toy.price}"
 
-        // Evento al presionar el botón AGREGAR
+        // Evento al tocar el botón agregar
         holder.btnAddToCart.setOnClickListener {
             onAddToCartClick(toy)
         }
 
-        // Evento al tocar la IMAGEN para verla en pantalla completa
+        // Para ver la imagen completa al tocar la tarjeta
         holder.imgToy.setOnClickListener {
             showFullImageDialog(holder.itemView.context, toy.imageResId)
         }
