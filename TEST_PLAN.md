@@ -51,14 +51,14 @@ En este documento registro la ejecución de los casos de prueba para el flujo de
 
 | ID Caso | Módulo | Descripción / Escenario | Pasos de Ejecución | Resultado Esperado | Estado | Evidencia |
 | :--- | :--- | :--- | :--- | :--- | :---: | :---: |
-| **TC-001** | UI | Responsividad Tablet (Portrait) | Abrir la app en posición vertical en la tablet. | El catálogo se muestra distribuido en **3 a 4 columnas** aprovehando el ancho de pantalla. | PASSED | [Ver Imagen](#tc-001--tc-002-responsividad-en-tablet) |
-| **TC-002** | UI | Responsividad Tablet (Landscape) | Girar la tablet a posición horizontal. | El catálogo se reajusta a **4 a 5 columnas** sin superposición de elementos. | PASSED | [Ver Imagen](#tc-001--tc-002-responsividad-en-tablet) |
+| **TC-001** | UI | Responsividad Tablet (Portrait) | Abrir la app en posición vertical en la tablet. | El catálogo se muestra distribuido en **2 columnas** aprovehando el ancho de pantalla. | PASSED | [Ver Imagen](#tc-001--tc-002-responsividad-en-tablet) |
+| **TC-002** | UI | Responsividad Tablet (Landscape) | Girar la tablet a posición horizontal. | El catálogo se reajusta a **3 columnas** sin superposición de elementos. | PASSED | [Ver Imagen](#tc-001--tc-002-responsividad-en-tablet) |
 | **TC-003** | UI | Modal de Imagen | Hacer tap sobre la imagen de cualquier juguete. | Se despliega un diálogo flotante a pantalla completa con la imagen del producto. | PASSED | [Ver Imagen](#tc-003--tc-004-interacción-y-filtros) |
 | **TC-004** | Filtros | Filtrado por Franquicia | Seleccionar el Chip "Chucky". | La lista se filtra mostrando únicamente productos de la franquicia seleccionada. | PASSED | [Ver Imagen](#tc-003--tc-004-interacción-y-filtros) |
 | **TC-005** | Carrito | Agregar producto y Badge | Presionar "Agregar" en un producto. | El botón notifica con un Toast y el Badge de la Toolbar incrementa su valor. | PASSED | [Ver Imagen](#tc-005--tc-007-gestión-de-carrito) |
 | **TC-006** | Carrito | Persistencia local | Agregar artículos, cerrar/destruir la app y reabrir. | El carrito y el Badge mantienen los artículos previamente agregados. | PASSED | [Ver Imagen](#tc-005--tc-007-gestión-de-carrito) |
 | **TC-007** | Carrito | Modificar cantidades | Abrir el BottomSheet/Diálogo del carrito y presionar `+` / `-`. | El total acumulado y las cantidades unitarias se recalculan en tiempo real. | PASSED | [Ver Imagen](#tc-005--tc-007-gestión-de-carrito) |
-| **TC-008** | Checkout | Validación de Campos Vacíos | Presionar "Confirmar Pedido" con nombre (< 3 chars) o dirección (< 10 chars). | Muestra mensaje de error en el campo correspondiente (`error`) y solicita foco. | PASSED | [Ver Imagen](#tc-008--tc-012-validaciones-de-checkout-y-ux) |
+| **TC-008** | Checkout | Validación de Campos Vacíos | Presionar "Confirmar Pedido" con nombre (< 10 chars) o dirección (< 10 chars). | Muestra mensaje de error en el campo correspondiente (`error`) y solicita corregir los datos. | PASSED | [Ver Imagen](#tc-008--tc-012-validaciones-de-checkout-y-ux) |
 | **TC-009** | Checkout | Lógica de Método de Pago | Seleccionar la opción "Pago en Efectivo". | El contenedor con los campos de la tarjeta (`container_card_fields`) se oculta (`GONE`). | PASSED | [Ver Imagen](#tc-008--tc-012-validaciones-de-checkout-y-ux) |
 | **TC-010** | Checkout | Validación de Tarjeta | Seleccionar "Tarjeta" e ingresar < 16 dígitos, fecha inválida o CVV < 3 dígitos. | Arroja mensaje de error impidiendo procesar el pago hasta corregirlo. | PASSED | [Ver Imagen](#tc-008--tc-012-validaciones-de-checkout-y-ux) |
 | **TC-011** | UX | Auto-formato de Fecha MM/AA | Escribir la secuencia de dígitos `0` `5` `3` `0` en el campo de vencimiento. | El campo autocompleta la diagonal mostrando `05/30` sin intervención del usuario. | PASSED | [Ver Imagen](#tc-008--tc-012-validaciones-de-checkout-y-ux) |
@@ -69,7 +69,7 @@ En este documento registro la ejecución de los casos de prueba para el flujo de
 
 ## 📷 Evidencias de Ejecución (Screenshots)
 
-> **Nota:** Guarda tus imágenes en la carpeta `docs/screenshots/` de tu repositorio con los nombres indicados abajo para que se visualicen automáticamente en esta sección.
+
 
 ### TC-001 & TC-002: Responsividad en Tablet
 | Modo Portrait (Tablet Vertical) | Modo Landscape (Tablet Horizontal) |
